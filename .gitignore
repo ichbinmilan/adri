@@ -1,6 +1,7 @@
 /.ddev/
 .env
 .idea/
+/public/project-images/
 
 ###> symfony/framework-bundle ###
 /.env.local

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{#{% block body %}#}
+{#{% for image in images %}#}
+    {#{{ image }}<br>#}
+    {#{% endfor %}#}
+{#{% endblock %}#}
+
+{% block title %} {% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/lightgallery/css/lightgallery.css">
+    <style>
+        .thumb {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            margin-right: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {% set active = ['gallery'] %}
+    {{ parent() }}
+
+    <script src="/lightgallery/js/lightgallery.min.js"></script>
+    <script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+    {#<script src="/lightgallery/js/lg-zoom.min.js"></script>#}
+    {#<script src="/lightgallery/js/lg-fullscreen.min.js"></script>#}
+
+    <script> lightGallery(document.getElementById('lightgallery'), {
+            download: false,
+            // thumbnail: false,
+            showThumbByDefault: false
+            // selector: '.item'
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="container my-100">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{ picture }}" style="max-width: 100%;">
+            </div>
+            <div class="col-md-7">
+                <div class="bl mb-5">
+                    <h2 class="mb-3">{{ title }}</h2>
+                    <h4>{{ year }}</h4>
+                    <p class="my-5">{{ body }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <div class="row" id="lightgallery" style="margin: 0;">
+                {% for img in images %}
+                    <a href="/{{ imgDir }}/{{ img }}">
+                        <div class="thumb">
+                            <img class="mr-4 mb-4" src="/{{ imgDir }}/thumb/{{ img }}" style="min-height: 100%; min-width: 100%;">
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

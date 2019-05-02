@@ -24,7 +24,7 @@ class Project
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $head;
+    private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -46,6 +46,11 @@ class Project
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="string", length=16, nullable=true)
+     */
+    private $year;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,14 +68,14 @@ class Project
         return $this;
     }
 
-    public function getHead(): ?string
+    public function getTitle(): ?string
     {
-        return $this->head;
+        return $this->title;
     }
 
-    public function setHead(string $head): self
+    public function setTitle(string $title): self
     {
-        $this->head = $head;
+        $this->title = $title;
 
         return $this;
     }
@@ -119,6 +124,18 @@ class Project
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getYear(): ?string
+    {
+        return $this->year;
+    }
+
+    public function setYear(?string $year): self
+    {
+        $this->year = $year;
 
         return $this;
     }
