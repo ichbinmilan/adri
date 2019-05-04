@@ -2,6 +2,7 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
+            cost: 12
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -16,6 +17,12 @@ security:
             security: false
         main:
             anonymous: true
+#            form_login:
+#                login_path: login
+#                check_path: login
+            logout:
+                path: logout
+                target: login
             guard:
                 authenticators:
                     - App\Security\AppAuthenicatorAuthenticator
@@ -32,4 +39,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/backend, roles: ROLE_USER }

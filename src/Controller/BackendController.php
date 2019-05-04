@@ -20,6 +20,14 @@ use Intervention\Image\ImageManager;
 class BackendController extends AbstractController
 {
     /**
+     * @Route("/backend", name="backend")
+     */
+    public function backend(){
+        return $this->render('backend/index.html.twig');
+    }
+
+
+    /**
      * @Route("/backend/new-project", name="new_project")
      */
     public function upload(Request $request)
