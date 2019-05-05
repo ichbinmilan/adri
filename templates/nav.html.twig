@@ -1,4 +1,4 @@
-<div class="" style="font-size: 16px;">
+<div style="font-size: 16px;">
     <ul class="nav mr-auto">
         <li class="nav-item">
             <a id="home" class="nav-link" href="{{ path('home') }}">Home</a>
@@ -12,8 +12,10 @@
         <li class="nav-item">
             <a id="contacts" class="nav-link" href="{{ path('contacts') }}">Contacts</a>
         </li>
+    </ul>
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <ul class="nav mr-auto">
             <li class="nav-item">
                 <a id="" class="nav-link" href="{{ path('backend') }}">ПРОМЯНА</a>
             </li>
@@ -26,7 +28,7 @@
             <li class="nav-item">
                 <a id="" class="nav-link" href="{{ path('logout') }}">ИЗХОД</a>
             </li>
-        {% endif %}
+        </ul>
+    {% endif %}
 
-    </ul>
 </div>

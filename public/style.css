@@ -31,7 +31,10 @@ h1 span {
 }
 
 h2 {
-
+    font-family: inherit;
+    font-size: 48px;
+    line-height: 56px;
+    color: #EADECF;
 }
 
 h3 {
@@ -55,6 +58,17 @@ h4 {
     opacity: 1;
 }
 
+.big-pic {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    background: center center no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
 .square {
     background: center center no-repeat;
     background-size: cover;
@@ -74,4 +88,18 @@ h4 {
     padding-left: 10%;
     padding-right: 15%;
     bottom: 15%;
+}
+
+.footer-moto {
+    font-family: "Nothing You Could Do", corsive !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+    color: #BEB2A4 !important;
+}
+
+.alert-success {
+    text-align: center;
+    background-color: inherit;
+    border-color: #c3e6cb;
+    color: inherit;
 }

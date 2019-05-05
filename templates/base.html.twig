@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Adri's light{% endblock %}</title>
     {% block stylesheets %}
         {#{{ encore_entry_link_tags('app') }}#}
         {#<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
@@ -12,26 +12,53 @@
 </head>
 <body>
 <div class="container">
+
     <div class="row align-items-end">
 
         {#logo#}
-            <div class="my-5 col-md-5 order-12 text-right">
-                <a class="nav-link" href="{{ path('home') }}">
-                    <h1>Adriana Boyadzhieva<br><span>Light Art</span></h1>
-                </a>
-            </div>
+        <div class="my-5 col-md-5 order-12 text-right">
+            <a class="nav-link" href="{{ path('home') }}">
+                <h1>Adriana Boyadzhieva<br><span>Light Art</span></h1>
+            </a>
+        </div>
 
         {#menu#}
         <div class="my-5 col-md-7 order-1">
-            {% include 'nav.html.twig' %}
+            {% block menu %}
+                {% include 'nav.html.twig' %}
+            {% endblock %}
         </div>
 
     </div>
 </div>
+
+<div class="container">
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+
 {% block body %}{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}
 
 {% block javascripts %}
     <script src="/bootstrap.min.css"></script>
+    <script>
+        function scrollToTop() {
+            if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
+                window.scrollBy(0, -50);
+                var timeOut = setTimeout('scrollToTop()', 10);
+            }
+            else {
+                clearTimeout(timeOut);
+            }
+        }
+    </script>
 {% endblock %}
 </body>
 </html>

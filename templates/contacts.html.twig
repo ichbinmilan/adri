@@ -1,10 +1,64 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="big-pic" style="background-image: url('{{ asset('contact_page.jpg') }}')"></div>
+
+    <div class="container mb-5">
+        <h2 class="text-center my-5">Contacts</h2>
+        <div class="row">
+            <div class="col-md-5 my-5">
+                <p> If you want a catalog of the available pieces or to make an order or just a friendly conversation please contact me.</p>
+                <p>&nbsp;</p>
+                <p>blubaluda@gmail.com</p>
+                <p>+359 886 000 324</p>
+                <p>&nbsp;</p>
+                <a href="https://www.facebook.com/adrislight" target="_blank"> <img src="{{ asset('facebook.svg') }}"></a>&emsp;
+                <a href="https://www.pinterest.com/adrianaboyadjieva" target="_blank"><img src="{{ asset('pinterest.svg') }}"></a> &emsp;
+                <a href="https://www.instagram.com/adrianaboyadjieva" target="_blank"><img src="{{ asset('instagram.svg') }}"></a> &emsp;
+            </div>
+            <div class="col-md-1"></div>
+
+            <div class="col-md-6 my-5">
+                <form method="post">
+                    <p><input type="text" name="name" class="form-control" placeholder="Name"></p>
+                    <p><input type="email" name="email" class="form-control" placeholder="E-mail*"></p>
+                    <p><input type="text" name="subject" class="form-control" placeholder="Subject"></p>
+                    <p><textarea rows="3" class="form-control md-textarea" name="message" placeholder="Message"></textarea></p>
+                    <p class="text-right">
+                        <button class="btn btn-outline-light" type="submit" disabled="disabled">Send</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block title %}
 
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .form-control {
+            color: #EADECF;
+            background-color: inherit;
+            background-clip: padding-box;
+            border: none;
+            border-bottom: 1px solid #5F5F5F;
+            border-radius: 0;
+            transition: none;
+            /*border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+        }
+
+        .form-control:focus {
+            color: inherit;
+            background-color: inherit;
+            border-color: inherit;
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
 {% endblock %}
 
