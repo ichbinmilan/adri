@@ -1,8 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
-    <p>Тук засега няма нищо, защото не знам какво да сложа.</p>
-</div>
+    <div class="container mb-5">
+        <h2 class="text-center my-5">Edit projects</h2>
+        <div class="row">
+
+            {% for project in projects %}
+                <div class="col-md-4">
+                    <a href="{{ path('project_upload', {'projectId': project.id}) }}">
+                        <div class="square mx-5 my-5 align-items-end {{ project.status }}" style="background-image: url('/{{ projectDir }}/{{ project.image }}');">
+                            <div class="content">
+                                <h3>{{ project.title }}</h3>
+                                <h4>{{ project.year }}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
 {% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    .hidden-class {
+        border: gray 5px solid;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50;
+    }
+</style>
+{% endblock %}

@@ -2,6 +2,10 @@
 
 {% block body %}
     <div class="my-5 container">
+        {% if form.vars.value is not null %}
+        <h2 class="my-5">Промяна в проекта <small style="color: #aacd4e">ако не избереш файлове, ще си останат старите</small></h2>
+        {% endif %}
+
         {{ form(form) }}
     </div>
 {% endblock %}

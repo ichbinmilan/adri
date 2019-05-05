@@ -24,34 +24,6 @@
     </div>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .square {
-            /*width: 100%;*/
-            /*height: 350px;*/
-            background: center center no-repeat;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-        }
-
-        .square:after {
-            content: "";
-            display: block;
-            padding-bottom: 100%;
-        }
-
-        .content {
-            position: absolute;
-            padding-left: 10%;
-            top: 70%;
-            /*transform: translateY(100%);*/
-            /*width: 80%;*/
-            /*height: 80%;*/
-        }
-    </style>
-{% endblock %}
+{#{% block stylesheets %}{% endblock %}#}
 
 

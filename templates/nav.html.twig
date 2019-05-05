@@ -15,16 +15,16 @@
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="nav-item">
-                <a id="" class="nav-link" href="{{ path('new_project') }}">Нов проект</a>
-            </li>
-            {#<li class="nav-item">#}
-            {#<a id="" class="nav-link" href="{{ path('edit_project') }}">Промяна на проект</a>#}
-            {#</li>#}
-            <li class="nav-item">
-                <a id="contacts" class="nav-link" href="{{ path('chabgepass') }}">Достъп</a>
+                <a id="" class="nav-link" href="{{ path('backend') }}">ПРОМЯНА</a>
             </li>
             <li class="nav-item">
-                <a id="" class="nav-link" href="{{ path('logout') }}">Изход</a>
+                <a id="" class="nav-link" href="{{ path('project_upload') }}">КАЧВАНЕ</a>
+            </li>
+            <li class="nav-item">
+                <a id="" class="nav-link" href="{{ path('chabgepass') }}">ДОСТЪП</a>
+            </li>
+            <li class="nav-item">
+                <a id="" class="nav-link" href="{{ path('logout') }}">ИЗХОД</a>
             </li>
         {% endif %}
 
