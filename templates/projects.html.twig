@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {% endblock %}
+{% block title %}{{ parent() }} - Projects{% endblock %}
 
 {% block body %}
     <div class="big-pic" style="background-image: url('{{ asset('project_page.jpg') }}')"></div>
 
     <div class="container mb-5">
-        <h2 class="text-center my-5">Projects</h2>
+        <h2 class="text-center my-80">Projects</h2>
         <div class="row">
 
             {% for project in projects %}

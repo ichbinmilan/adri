@@ -1,12 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{#{% block body %}#}
-{#{% for image in images %}#}
-    {#{{ image }}<br>#}
-    {#{% endfor %}#}
-{#{% endblock %}#}
-
-{% block title %} {% endblock %}
+{% block title %}{{ parent() }} - {{ title }}{% endblock %}
 
 
 {% block stylesheets %}

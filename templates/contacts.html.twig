@@ -4,7 +4,7 @@
     <div class="big-pic" style="background-image: url('{{ asset('contact_page.jpg') }}')"></div>
 
     <div class="container mb-5">
-        <h2 class="text-center my-5">Contacts</h2>
+        <h2 class="text-center my-80">Contacts</h2>
         <div class="row">
             <div class="col-md-5 my-5">
                 <p> If you want a catalog of the available pieces or to make an order or just a friendly conversation please contact me.</p>
@@ -34,9 +34,7 @@
 
 {% endblock %}
 
-{% block title %}
-
-{% endblock %}
+{% block title %}{{ parent() }} - Contacts{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
