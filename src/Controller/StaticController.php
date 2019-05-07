@@ -42,6 +42,8 @@ class StaticController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->getData();
+//            $message['message'] = str_replace("\r\n", '<br>',  $message['message']);
+
             $this->sendmail($message, $mailer);
 
             $this->addFlash('success', 'The message was sent successfully. Thank You!');

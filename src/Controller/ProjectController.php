@@ -16,7 +16,7 @@ class ProjectController extends AbstractController
      */
     public function projects()
     {
-        $projects = $this->getDoctrine()->getRepository(Project::class)->findBy(['status' => true], ['weight' => 'DESC', 'date' => 'DESC']);
+        $projects = $this->getDoctrine()->getRepository(Project::class)->findBy(['status' => true], ['weight' => 'DESC', 'date' => 'ASC']);
         if (!empty($projects)) {
             foreach ($projects as $project) {
                 $viewProject[] = [
@@ -48,7 +48,7 @@ class ProjectController extends AbstractController
             'title' => $project->getTitle(),
             'picture' => '/' . $projectDir . '/' . $project->getPicture(),
             'year' => $project->getYear(),
-            'body' => $project->getBody(),
+            'body' => str_replace("\r\n", '<br>', $project->getBody()),
             'imgDir' => $projectDir . '/' . $id,
             'images' => (new Gallery($projectDir . '/' . $id))->images,
         ];

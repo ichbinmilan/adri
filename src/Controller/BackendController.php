@@ -25,7 +25,7 @@ class BackendController extends AbstractController
      */
     public function backend()
     {
-        $projects = $this->getDoctrine()->getRepository(Project::class)->findBy([], ['weight' => 'DESC', 'date' => 'DESC']);
+        $projects = $this->getDoctrine()->getRepository(Project::class)->findBy([], ['weight' => 'DESC', 'date' => 'ASC']);
         $viewProject = null;
 
         if (!empty($projects)) {
@@ -264,4 +264,8 @@ class BackendController extends AbstractController
         return md5(uniqid());
     }
 
+    /*    public function lr($text){
+
+        }
+    */
 }

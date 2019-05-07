@@ -36,6 +36,7 @@ h2 {
     line-height: 56px;
     color: #EADECF;
 }
+
 .my-80 {
     margin-top: 80px;
     margin-bottom: 70px;
@@ -106,4 +107,22 @@ h4 {
     background-color: inherit;
     border-color: #c3e6cb;
     color: inherit;
+}
+
+.form-control {
+    color: #EADECF;
+    background-color: inherit;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1px solid #5F5F5F;
+    border-radius: 0;
+    transition: none;
+}
+
+.form-control:focus {
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+    outline: none;
+    box-shadow: none;
 }
