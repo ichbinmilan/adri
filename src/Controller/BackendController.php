@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Project;
+use App\Gallery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -47,6 +48,66 @@ class BackendController extends AbstractController
             'projects' => $viewProject,
             'projectDir' => $this->getParameter('projectDir'),
         ]);
+    }
+
+
+    /**
+     * @Route("/backend/project/delete/{projectId}", name="project_delete")
+     */
+    public function delete(Request $request, $projectId)
+    {
+        $projectDir = $this->getParameter('projectDir');
+
+        if (!empty($projectId)) {
+            $project = $this->getDoctrine()->getRepository(Project::class)->find($projectId);
+            if (!empty($project)) {
+
+                $form = $this->createFormBuilder()
+//                    ->add('id', HiddenType::class, ['data' => $projectId])
+                    ->add('delete', SubmitType::class, ['attr' => ['class' => 'btn btn-danger']])
+                    ->getForm();
+
+                $viewProject = [
+                    'title' => $project->getTitle(),
+                    'picture' => '/' . $projectDir . '/' . $project->getPicture(),
+                    'year' => $project->getYear(),
+                    'body' => $project->getBody(),
+                    'imgDir' => $projectDir . '/' . $projectId,
+                    'images' => (new Gallery($projectDir . '/' . $projectId))->images,
+                    'deleteForm' => $form->createView(),
+                ];
+
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+//                    $id = $form->getData()['id'];
+                    $em = $this->getDoctrine()->getManager();
+                    $em->remove($project);
+                    $em->flush();
+
+                    unlink($projectDir . DIRECTORY_SEPARATOR . $project->getPicture());
+                    $dir = $projectDir . DIRECTORY_SEPARATOR . $projectId;
+                    $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+                    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+                    foreach ($files as $file) {
+                        if ($file->isDir()) {
+                            rmdir($file->getRealPath());
+                        } else {
+                            unlink($file->getRealPath());
+                        }
+                    }
+                    rmdir($dir);
+
+                    $this->addFlash('success', 'Пожънахме успех с изтриването!');
+
+                    return $this->redirectToRoute('backend');
+
+
+                }
+                return $this->render('project.html.twig', $viewProject);
+
+
+            }
+        }
     }
 
 
@@ -101,7 +162,7 @@ class BackendController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageManager = new ImageManager();
             $data = $form->getData();
-            if (empty($project->getDate())){
+            if (empty($project->getDate())) {
                 $project->setDate(new \DateTime('now'));
             }
 
@@ -166,6 +227,7 @@ class BackendController extends AbstractController
                         ->save($projectDir . '/' . '/thumb/' . $fileFullName);
                 }
             }
+            $this->addFlash('success', 'Честит новокачен проект! Продължавай в същия дух!');
             return $this->redirectToRoute('backend');
         }
 

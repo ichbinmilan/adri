@@ -15,6 +15,8 @@
                             </div>
                         </div>
                     </a>
+                    <p class="text-center"><a style="color: red" href="{{ path('project_delete', {'projectId': project.id}) }}">Изтриване</a></p>
+
                 </div>
             {% endfor %}
 
@@ -23,14 +25,14 @@
 {% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
-<style>
-    .hidden-class {
-        border: gray 5px solid;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        border-radius: 50;
-    }
-</style>
+    {{ parent() }}
+    <style>
+        .hidden-class {
+            border: gray 5px solid;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50;
+        }
+    </style>
 {% endblock %}
 {% block footer %}{% endblock %}

@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
 {
-    private $message = [];
-
     /**
      * @Route("/", name="home")
      */
@@ -29,35 +30,38 @@ class StaticController extends AbstractController
     /**
      * @Route("/contacts", name="contacts")
      */
-    public function contacts(Request $request)
+    public function contacts(Request $request, \Swift_Mailer $mailer)
     {
-        if (!empty($request->getContent())) {
-            $messageArr['name'] = strip_tags($request->get('name'));
-            $messageArr['email'] = strip_tags($request->get('email'));
-            $messageArr['subject'] = strip_tags($request->get('subject'));
-            $messageArr['message'] = strip_tags($request->get('message'));
+        $form = $this->createFormBuilder([])
+            ->add('name', TextType::class, ['required' => false, 'label' => false, 'attr' => ['placeholder' => 'Name']])
+            ->add('email', EmailType::class, ['required' => true, 'label' => false, 'attr' => ['placeholder' => 'e-mail']])
+            ->add('subject', TextType::class, ['required' => false, 'label' => false, 'attr' => ['placeholder' => 'Subject']])
+            ->add('message', TextareaType::class, ['required' => false, 'label' => false, 'attr' => ['placeholder' => 'Message', 'rows' => '3']])
+            ->getForm();
 
-//            $this->message = $messageArr;
-//            $this->sendmail(new \Swift_Mailer('gmail'));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = $form->getData();
+            $this->sendmail($message, $mailer);
 
-//            dd($name, $email, $subject, $message);
-            $this->addFlash('success', 'The message was NOT sent successfully. Please send me e-mail');
-//            $this->addFlash('success', 'The message was sent successfully. Thank You!');
+            $this->addFlash('success', 'The message was sent successfully. Thank You!');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('contacts');
         }
 
-        return $this->render('contacts.html.twig');
+        return $this->render('contacts.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
-    function sendmail(\Swift_Mailer $mailer)
+    function sendmail($mailMessage, \Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message())
             ->setSubject('Message from Adri\'s light site')
-            ->setFrom($this->message['email'])
+            ->setFrom($mailMessage['email'])
             ->setTo(getenv('mymail'))
             ->setBody($this->renderView('email.html.twig',
-                ['message' => $this->message,]
+                ['message' => $mailMessage,]
             ), 'text/html');
         $mailer->send($message);
     }

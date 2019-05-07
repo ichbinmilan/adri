@@ -38,6 +38,12 @@
 
 {% block body %}
     <div class="container my-100">
+
+        {% if deleteForm is defined %}
+            <h1 style="color: red">Наистина ли да се изтрие този проект ЗАВИНАГИ?!</h1>
+        {{ form(deleteForm) }}
+        {% endif %}
+
         <div class="row">
             <div class="col-md-5">
                 <img src="{{ picture }}" style="max-width: 100%;">
