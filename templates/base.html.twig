@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% if app.environment == 'prod' and not is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% block Analytics %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38380251-7"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'UA-38380251-7');
+            </script>
+        {% endblock %}
+    {% endif %}
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Adri's light{% endblock %}</title>
